@@ -1,7 +1,7 @@
 var finances = [
-  ['Jan-2010', 867884],
-  ['Feb-2010', 984655],
-  ['Mar-2010', 322013],
+  ['Jan-2010', 867884], 
+  ['Feb-2010', 984655], 
+  ['Mar-2010', 322013], 
   ['Apr-2010', -69417],
   ['May-2010', 310503],
   ['Jun-2010', 522857],
@@ -87,7 +87,86 @@ var finances = [
   ['Feb-2017', 671099],
 ];
 
+
 // The total number of months included in the dataset represent the length of the array 
-console.log(finances.length)
+console.log(finances.length) // Return 86 months
 
 // The net total amount of Profit/Losses over the entire period.
+var netTotal = 0
+for (var i = 0; i<finances.length; i++) {
+  // console.log(finances[i][1])
+  netTotal = netTotal + finances[i][1] 
+}
+console.log(netTotal) // Return $38382578
+
+// Below is the average of the **changes** in Profit/Losses over the entire period.
+ //  PSEUDO CODE OF THE CHANGES
+ // 
+ // 2. Write down the changes for the current month month and subtract the previous month from it to give the change at the level of the current month.
+ // 3. Do step 2 for all the months till you get to the last month.
+ // 4. Add all the changes in profit from the various months till you get to the change in profit for the last month to get the total change in profit.
+ // 5. Lastly, divide the total change in profit but the total number of months - the first month.
+ // 6. The result from step 5 is the average of the total change in profit. 
+
+var analysis;
+var totalChangesInProfit = 0;
+var currMonth; 
+var date;
+var least = ["", 9999999999999]
+var greatest = ["", 0]
+for (var i=1; i<finances.length; i++) {
+  currMonth = finances[i]
+var currentMonthProfit =  finances[i][1];
+var previousMonthProfit = finances[i-1][1];
+date = currMonth[0]
+var changes = currentMonthProfit - previousMonthProfit;
+totalChangesInProfit = totalChangesInProfit + changes;
+if(changes >greatest[1]){
+  greatest = [date, changes]
+}
+if(changes < least[1]) {
+  least = [date, changes]
+}
+}
+var averageChanges = Math.round((totalChangesInProfit / (finances.length-1)) * 100) / 100;
+
+// analysis = `
+// Financial Analysis 
+// ----------------
+// Total Months: ${finances.length}
+
+// Total: ${netTotal}
+
+// Average Change: ${averageChanges}
+
+// Greatest Increase in Profit/Losses: ${greatest}
+
+// Greatest Decrease in Profit/Losses: ${least}
+// `
+
+analysis = 
+'Financial Analysis' + 
+'\n' + 
+'----------------' +
+ '\n' + 
+ 'Total Months: ' + finances.length + 
+ '\n' +
+ 'Total:' + netTotal + 
+ '\n' +
+ 'Average Change: ' + averageChanges +
+ '\n' +
+ 'Greatest Increase in Profit/Losses: ' + greatest +
+ '\n' +
+ 'Greatest Decrease in Profit/Losses: ' + least 
+
+
+
+console.log(analysis);
+
+
+//console.log("greatest: ", greatest)
+
+//console.log("least: ", least)
+
+
+
