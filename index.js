@@ -97,7 +97,7 @@ for (var i = 0; i<finances.length; i++) {
   // console.log(finances[i][1])
   netTotal = netTotal + finances[i][1] 
 }
-console.log(netTotal) // Return $38382578
+console.log(netTotal) // Return $38382578 which is The net total amount of Profit/Losses over the entire period.
 
 // Below is the average of the **changes** in Profit/Losses over the entire period.
  //  PSEUDO CODE OF THE CHANGES
@@ -108,41 +108,43 @@ console.log(netTotal) // Return $38382578
  // 5. Lastly, divide the total change in profit but the total number of months - the first month.
  // 6. The result from step 5 is the average of the total change in profit. 
 
+// The code below is the calculation of the various changes and the average change 
+
 var analysis;
 var totalChangesInProfit = 0;
 var currMonth; 
 var date;
 var least = ["", 9999999999999]
 var greatest = ["", 0]
+var greatestDate;
+var greatestValue;
+var leastDate;
+var leastValue;
+
 for (var i=1; i<finances.length; i++) {
   currMonth = finances[i]
-var currentMonthProfit =  finances[i][1];
-var previousMonthProfit = finances[i-1][1];
-date = currMonth[0]
-var changes = currentMonthProfit - previousMonthProfit;
-totalChangesInProfit = totalChangesInProfit + changes;
-if(changes >greatest[1]){
-  greatest = [date, changes]
-}
-if(changes < least[1]) {
-  least = [date, changes]
-}
+  var currentMonthProfit =  finances[i][1];
+  var previousMonthProfit = finances[i-1][1];
+  date = currMonth[0]
+  var changes = currentMonthProfit - previousMonthProfit;
+  totalChangesInProfit = totalChangesInProfit + changes;
+
+  if(changes >greatest[1]){
+    greatest = [date, changes]
+    greatestDate = date;
+    greatestValue = changes;
+  }
+  
+  if(changes < least[1]) {
+    least = [date, changes]
+    leastDate = date;
+    leastValue = changes;
+
+  }
 }
 var averageChanges = Math.round((totalChangesInProfit / (finances.length-1)) * 100) / 100;
 
-// analysis = `
-// Financial Analysis 
-// ----------------
-// Total Months: ${finances.length}
-
-// Total: ${netTotal}
-
-// Average Change: ${averageChanges}
-
-// Greatest Increase in Profit/Losses: ${greatest}
-
-// Greatest Decrease in Profit/Losses: ${least}
-// `
+// This is an analysis of How the data will be displayed in the console.
 
 analysis = 
 'Financial Analysis' + 
@@ -155,9 +157,9 @@ analysis =
  '\n' +
  'Average Change: ' + averageChanges +
  '\n' +
- 'Greatest Increase in Profit/Losses: ' + greatest +
+ 'Greatest Increase in Profit/Losses: ' + greatestDate + " $(" + greatestValue + ")" +
  '\n' +
- 'Greatest Decrease in Profit/Losses: ' + least 
+ 'Greatest Decrease in Profit/Losses: ' + leastDate + " $(" + leastValue + ")" 
 
 
 
