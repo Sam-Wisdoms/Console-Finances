@@ -121,6 +121,7 @@ var greatestValue;
 var leastDate;
 var leastValue;
 
+// This is a for loop for the various analysis
 for (var i=1; i<finances.length; i++) {
   currMonth = finances[i]
   var currentMonthProfit =  finances[i][1];
