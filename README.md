@@ -25,6 +25,8 @@ I will be glad to help you access the analysis.
 ## GitHub Repository for the Project:
 https://github.com/Sam-Wisdoms/Console-Finances
 
+## Screenshot of the README
+![Financial Data](https://github.com/Sam-Wisdoms/Console-Finances/assets/94742747/f651c0dd-0a03-4375-b7df-418a0665fa48)
 
 ## Credits: 
 Mr. Dennis Itua (Instructor)
